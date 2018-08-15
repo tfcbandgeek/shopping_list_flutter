@@ -6,13 +6,15 @@ import 'package:shopping_list/additional.dart';
 import 'package:shopping_list/data.dart';
 import 'package:shopping_list/myfab.dart';
 import 'package:shopping_list/settings.dart';
-
-// 0267, 0267
+import 'package:shopping_list/tags.dart';
 
 // Data --------------------------------------------------------------------------------------------
+/// Marked true when the data has been changed on this page
 bool edited = false;
 
 // Shopping List View Classes ----------------------------------------------------------------------
+/// ShoppingListView
+/// The Root View for the ShoppingList
 class ShoppingListView extends StatefulWidget {
   @override
   _ShoppingListViewState createState() {
@@ -20,6 +22,8 @@ class ShoppingListView extends StatefulWidget {
   }
 }
 
+/// ShoppingListViewState
+/// The State of the ShoppingListViewState, (Internal)
 class _ShoppingListViewState extends State<ShoppingListView> {
   TextEditingController t = TextEditingController(text: current.title);
   TextEditingController n = TextEditingController(text: current.note);
@@ -46,6 +50,12 @@ class _ShoppingListViewState extends State<ShoppingListView> {
           );
         }
     );
+  }
+
+  void _setState(Function action) {
+    setState(() {
+      action();
+    });
   }
 
   @override
@@ -108,17 +118,13 @@ class _ShoppingListViewState extends State<ShoppingListView> {
       }, text: ADD, narrow: settings.narrowFab,
           background: Colors.teal, splash: Colors.tealAccent),
     );}
-
-  void _setState(Function action) {
-    setState(() {
-      action();
-    });
-  }
 }
 
 // Shopping List Menu ------------------------------------------------------------------------------
+/// Enum for the Options Menu
 enum ShoppingMenu { image, tags }
 
+/// Function used to build the ShoppingListOptions Menu Items
 List<Widget> _buildMenuActions(BuildContext context) {
   return <Widget>[
     FlatButton(
@@ -171,6 +177,7 @@ List<Widget> _buildMenuActions(BuildContext context) {
 }
 
 // ShoppingList List Builder -----------------------------------------------------------------------
+/// Function for building the Shopping List
 ExpansionPanel _buildShoppingListItem(BuildContext context, ShoppingItem item, Function setState) {
   return ExpansionPanel(
     headerBuilder: (BuildContext context, bool expanded) {
@@ -227,10 +234,7 @@ ExpansionPanel _buildShoppingListItem(BuildContext context, ShoppingItem item, F
           },
           controller: item.getNoteController(),
         ),
-        /** TODO: Figure this Out
-        Wrap(
-          children: _buildTagList(context, item, setState),
-        ),
+        TagsWidget(item.tags),
         RawMaterialButton(
           fillColor: PRIMARY,
           splashColor: PRIMARY_SPLASH,
@@ -242,28 +246,8 @@ ExpansionPanel _buildShoppingListItem(BuildContext context, ShoppingItem item, F
 
           },
         ),
-            **/
       ],
     ),
     isExpanded: item.expanded,
   );
-}
-
-// Tag List Builder --------------------------------------------------------------------------------
-List<Widget> _buildTagList(BuildContext context, ShoppingItem item, Function setState) {
-  return item.tags.map((String tag) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 2.0,
-        right: 2.0,
-      ),
-      child: Chip(
-          label: Text(tag),
-          onDeleted: () {
-            setState(() {
-              edited = true;
-            });
-          }),
-    );
-  }).toList();
 }

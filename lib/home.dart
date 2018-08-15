@@ -6,9 +6,9 @@ import 'package:shopping_list/myfab.dart';
 import 'package:shopping_list/settings.dart';
 import 'package:shopping_list/shoppinglist.dart';
 
-// 0133, 0133
-
 // Home View Classes -------------------------------------------------------------------------------
+/// ShoppingListHomePage
+/// The HomeView of the Application
 class ShoppingListHomePage extends StatefulWidget {
   ShoppingListHomePage({Key key, this.title}): super(key: key);
   final String title;
@@ -17,6 +17,8 @@ class ShoppingListHomePage extends StatefulWidget {
   _ShoppingListHomePageState createState() => _ShoppingListHomePageState();
 }
 
+/// ShoppingListHomePageState
+/// The State for the Home Page, (Internal)
 class _ShoppingListHomePageState extends State<ShoppingListHomePage> {
   void _addList() {
     setState(() {
@@ -38,7 +40,9 @@ class _ShoppingListHomePageState extends State<ShoppingListHomePage> {
       ),
       body: ListView.builder(
         itemCount: lists.length,
-        itemBuilder: _homeListItemBuilder,
+        itemBuilder: (BuildContext context, int index) {
+          return HomeListItem(lists[index]);
+        },
       ),
       floatingActionButton: CustomFab(_addList, text: ADD, narrow: settings.narrowFab,
         background: Colors.teal, splash: Colors.tealAccent),
@@ -47,8 +51,10 @@ class _ShoppingListHomePageState extends State<ShoppingListHomePage> {
 }
 
 // Menu --------------------------------------------------------------------------------------------
+/// Home Menu Enum for the various options
 enum HomeMenu {save, settings, about, export, import}
 
+/// Method to build the Home Options MEnu
 List<Widget> _buildMenuActions(BuildContext context) {
   return <Widget>[
     PopupMenuButton<HomeMenu>(
@@ -76,58 +82,69 @@ List<Widget> _buildMenuActions(BuildContext context) {
 }
 
 // Home List ItemBuilder ---------------------------------------------------------------------------
-Padding _homeListItemBuilder(BuildContext context, int index) {
-  return Padding(
-    padding: EdgeInsets.only(
-      left: 4.0,
-      right: 4.0,
-      top: 2.0,
-      bottom: 2.0,
-    ),
-    child: Container(
-      color: Color(0xFFB2DFDB),
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: 4.0,
-          right: 4.0,
-          top: 2.0,
-          bottom: 2.0,
-        ),
-        child: Row(
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                current = lists[index];
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (BuildContext context) => ShoppingListView(),
-                  fullscreenDialog: true,
-                ));
-              },
-              child: Column(
-                children: <Widget> [
-                  Row(
-                    children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Text(lists[index].getTitle()),
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Text(lists[index].note),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+/// HomeListItem
+/// The Widget used to show each of the ShoppingLists
+class HomeListItem extends StatelessWidget {
+  final ShoppingList _shoppingList;
+
+  HomeListItem(this._shoppingList);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 4.0,
+        right: 4.0,
+        top: 2.0,
+        bottom: 2.0,
+      ),
+      child: Container(
+        color: Color(0xFFB2DFDB),
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: 4.0,
+            right: 4.0,
+            top: 2.0,
+            bottom: 2.0,
+          ),
+          child: Row(
+            children: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  current = _shoppingList;
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context) => ShoppingListView(),
+                    fullscreenDialog: true,
+                  ));
+                },
+                child: Column(
+                  children: <Widget> [
+                    Row(
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Text(_shoppingList.getTitle()),
+                                Text("<" + _shoppingList.items.length.toString() + ">"),
+                              ],
+                            ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(_shoppingList.note),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }

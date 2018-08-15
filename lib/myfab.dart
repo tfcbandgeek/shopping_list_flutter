@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 
-// 0054, 0056
-
+/// CustomFab
+/// A custom Floating Action Button that can be either the traditional circle or a newer text button.
 class CustomFab extends StatelessWidget {
+  // The action to be called on the fab being pressed
   final Function pressed;
+  // The text of the fab
   final String text;
+  // The icon of the fab
   final Icon icon;
+  // The background color of the fab
   final Color background;
+  // The press color of the fab
   final Color splash;
+  // The foreground color of the fab
   final Color foreground;
+  // Select true it you want the narrow fab (Cirle)
   final bool narrow;
 
   CustomFab(

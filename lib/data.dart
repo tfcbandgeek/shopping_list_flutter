@@ -1,14 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-
-// 0149, 0149
+// Data Class, Needs A ton of Help
 
 // Data --------------------------------------------------------------------------------------------
+/// List of ShoppingLists
 List<ShoppingList> lists = List<ShoppingList>();
+/// The currently selected Shopping List
 ShoppingList current;
 
 // Data Classes ------------------------------------------------------------------------------------
+/// ShoppingList
+/// The class that encapsulates all of the data needed for each of the Shopping Lists
 class ShoppingList {
   // Data ------------------------------------------------------------------------------------------
   Image icon;
@@ -66,6 +69,9 @@ class ShoppingList {
   }
 }
 
+/// ShoppingItem
+/// This class encapsulates all of the data in a shopping list item, It will be getting more and more
+/// complex as time goes by
 class ShoppingItem {
   // Controllers -----------------------------------------------------------------------------------
   TextEditingController titleController;

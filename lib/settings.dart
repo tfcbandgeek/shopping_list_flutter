@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:shopping_list/additional.dart';
-
-// 0101, 0101
+// All of the Settings data and Views
 
 // Data --------------------------------------------------------------------------------------------
 Settings settings = Settings();

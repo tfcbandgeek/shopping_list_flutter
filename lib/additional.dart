@@ -6,11 +6,9 @@ import 'package:path_provider/path_provider.dart';
 
 import 'package:shopping_list/data.dart';
 
-// 0084, 0082
-
 // Version Constants -------------------------------------------------------------------------------
-const String VERSION = "0.2.2";
-const int BUILD = 4;
+const String VERSION = "0.2.3";
+const int BUILD = 5;
 
 // String Constants --------------------------------------------------------------------------------
 const String ABOUT = "About";
