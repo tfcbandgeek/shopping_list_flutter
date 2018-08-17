@@ -7,8 +7,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shopping_list/data.dart';
 
 // Version Constants -------------------------------------------------------------------------------
-const String VERSION = "0.2.3";
-const int BUILD = 5;
+const String VERSION = "0.2.6";
+const int BUILD = 8;
 
 // String Constants --------------------------------------------------------------------------------
 const String ABOUT = "About";

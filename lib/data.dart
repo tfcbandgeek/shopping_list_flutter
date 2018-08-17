@@ -67,6 +67,18 @@ class ShoppingList {
 
     return json.encode(data);
   }
+
+  // Class Methods ---------------------------------------------------------------------------------
+  int getUnGrabbedListItems() {
+    int r = 0;
+    for (ShoppingItem item in items) {
+      if (!item.checked) {
+        r++;
+      }
+    }
+
+    return r;
+  }
 }
 
 /// ShoppingItem

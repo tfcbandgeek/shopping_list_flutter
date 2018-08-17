@@ -29,27 +29,8 @@ class _ShoppingListViewState extends State<ShoppingListView> {
   TextEditingController n = TextEditingController(text: current.note);
 
   Future<bool> _onWillPop() async {
-    if (!edited) return true;
-
-    return await showDialog<bool>(
-        context: context,
-        builder: (BuildContext context) {
-          buildAlertDialog(
-              context,
-              Text(
-                SAVE_QUESTION,
-                style: Theme.of(context).textTheme.subhead.copyWith(color: Theme.of(context).textTheme.caption.color),
-              ),
-              CANCEL,
-                  () {Navigator.of(context).pop(true);},
-              SAVE,
-                  () {
-                save();
-                Navigator.of(context).pop(true);
-              }
-          );
-        }
-    );
+    if (edited) save();
+    return true;
   }
 
   void _setState(Function action) {
@@ -88,6 +69,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
                       labelText: NOTES,
                       filled: true,
                     ),
+                    maxLines: null,
                     onChanged: (text) {
                       edited = true;
                       current.note = text;

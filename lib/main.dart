@@ -4,8 +4,6 @@ import 'package:shopping_list/home.dart';
 import 'package:shopping_list/settings.dart';
 import 'package:shopping_list/additional.dart';
 
-List<String> poop = ["Soup", "Top", "Popcorn", "Lovely", "True", "Topical", "Gilmore", "Poop", "Until"];
-
 // Main Method -------------------------------------------------------------------------------------
 void main() {
   settings.load().then((void t) => load().then((void t) => runApp(ShoppingApp())));

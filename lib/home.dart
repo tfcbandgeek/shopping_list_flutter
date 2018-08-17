@@ -95,53 +95,30 @@ class HomeListItem extends StatelessWidget {
       padding: EdgeInsets.only(
         left: 4.0,
         right: 4.0,
-        top: 2.0,
-        bottom: 2.0,
       ),
-      child: Container(
-        color: Color(0xFFB2DFDB),
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: 4.0,
-            right: 4.0,
-            top: 2.0,
-            bottom: 2.0,
-          ),
-          child: Row(
-            children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  current = _shoppingList;
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (BuildContext context) => ShoppingListView(),
-                    fullscreenDialog: true,
-                  ));
-                },
-                child: Column(
-                  children: <Widget> [
-                    Row(
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Text(_shoppingList.getTitle()),
-                                Text("<" + _shoppingList.items.length.toString() + ">"),
-                              ],
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(_shoppingList.note),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+      child: GestureDetector(
+        onTap: () {
+          current = _shoppingList;
+          Navigator.push(context, MaterialPageRoute(
+            builder: (BuildContext context) => ShoppingListView(),
+            fullscreenDialog: true,
+          ));
+        },
+        child: Card(
+          color: Colors.grey,
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Column(children: <Widget>[
+              Row(children: <Widget>[
+                Text(_shoppingList.getTitle()),
+                Spacer(),
+                Text(_shoppingList.getUnGrabbedListItems().toString() + "/" + _shoppingList.items.length.toString() + "Left"),
+              ]),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(_shoppingList.note),
               ),
-            ],
+            ]),
           ),
         ),
       ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+String myFabVersion = "0.1.0";
+int myFabBuild = 1;
+
 /// CustomFab
 /// A custom Floating Action Button that can be either the traditional circle or a newer text button.
 class CustomFab extends StatelessWidget {
